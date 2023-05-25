@@ -1,8 +1,27 @@
-import React from "react";
-import { Card, CardBody } from "reactstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Card, CardBody } from "reactstrap";
+import UserContext from "../user/UserContext";
+import JoblyApi from "../api";
 
 function Job({ job }) {
     const { id, title, salary, equity, companyName } = job;
+    const {user, setUser} = useContext(UserContext);
+    const [isAppliedTo, setAppliedTo] = useState(user.applications.includes(id));
+
+    async function onClickApply(e) {
+        e.preventDefault();
+        try{
+            const applied = await JoblyApi.applyToJob(user.username, id);
+            if (applied) {
+                user.applications.push(id);
+                setUser(user);
+                setAppliedTo(true);
+            }
+        } catch(e) {
+            console.log(e);
+            alert("Error applying to job");
+        }
+    }
 
     return (
         <Card>
@@ -12,6 +31,7 @@ function Job({ job }) {
                 <div>Title: {title}</div>
                 <div>Salary: {salary}</div>
                 {equity?<div>Equity: {equity}</div>:""}
+                {isAppliedTo?<Button className="mt-2">Applied</Button>:<Button className="mt-2" color="primary" onClick={onClickApply}>Apply</Button>}
             </CardBody>
         </Card>
     )

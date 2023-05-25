@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardBody } from "reactstrap";
-import Job from "./Job";
+import Job from "../job/Job";
 import { useParams } from "react-router-dom";
 import JoblyApi from "../api";
 
@@ -41,7 +41,7 @@ function CompanyDetails() {
             </Card>
 
             <h1 className="mx-4">Jobs</h1>
-            {jobs.map(job => <Job key={job.id} job={job} />)}
+            {jobs.map(job => <div key={job.id} className="m-4"><Job job={job} /></div>)}
         </div>
 
     );

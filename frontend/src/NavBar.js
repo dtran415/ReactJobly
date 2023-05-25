@@ -5,7 +5,7 @@ import { Navbar, Nav, NavItem } from "reactstrap";
 import UserContext from "./user/UserContext";
 
 function NavBar() {
-  const user = useContext(UserContext);
+  const {user} = useContext(UserContext);
   return (
     <div>
       <Navbar expand="md">

@@ -59,7 +59,7 @@ function AppRoutes() {
 
   return (
     <BrowserRouter>
-      <UserContext.Provider value={user}>
+      <UserContext.Provider value={{user, setUser}}>
         <NavBar />
         <Routes>
           <Route path="/" element={<Welcome />} />
