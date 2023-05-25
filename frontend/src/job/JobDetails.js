@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "reactstrap";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import JoblyApi from "../api";
 import Company from "../company/Company";
 import Job from "./Job";
@@ -10,6 +10,7 @@ function JobDetails() {
     const [job, setJob] = useState(null);
 
     const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function getJob(id) {
@@ -19,6 +20,7 @@ function JobDetails() {
             } catch (e) {
                 const message = e.join("\n");
                 alert(message ? message : "Unknown error");
+                navigate('/jobs');
             }
             setIsLoading(false);
         }

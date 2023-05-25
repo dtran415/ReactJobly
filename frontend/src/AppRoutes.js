@@ -67,11 +67,11 @@ function AppRoutes() {
           <Route path="/jobs" element={<JobList />}/>
           <Route path="/companies/:handle" element={<CompanyDetails />}/>
           <Route path="/companies" element={<CompanyList />}/>
-          <Route path="/profile" element={<Profile user={user} updateUser={updateUser}/>}/>
+          <Route path="/profile" element={<Profile updateUser={updateUser}/>}/>
           <Route path="/signup" element={<SignUpForm signup={register}/>} />
           <Route path="/login" element={<LoginForm login={login}/>} />
           <Route path="/logout" element={<Logout setToken={setToken} />} />
-          <Route path="*" element={NotFound} />
+          <Route path="*" element={<NotFound/>} />
         </Routes>
       </UserContext.Provider>
       

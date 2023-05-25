@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
+import UserContext from "./UserContext";
+import {Navigate} from "react-router-dom";
 
-function Profile({user, updateUser}) {
-    const {username, password, firstName, lastName, email} = user;
-
-    const initialState = {username, password, firstName, lastName, email}
+function Profile({updateUser}) {
+    const {user} = useContext(UserContext);
+    const {username, firstName, lastName, email} = user || {};
+    const initialState = {username, firstName, lastName, email}
     const [formData, setFormData] = useState(initialState)
+
+    if (!user)
+        return <Navigate to="/" replace={true}/>
+
+
     const handleChange = evt => {
         const { name, value } = evt.target;
         setFormData(formData => ({
